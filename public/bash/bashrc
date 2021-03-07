@@ -1,0 +1,3 @@
+for f in "$HOME"/.shelltools/*.sh ; do
+  source "$f"
+done

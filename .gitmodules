@@ -4,3 +4,15 @@
 [submodule "private"]
 	path = private
 	url = git@github.com:lin17a/dotfiles.private.git
+[submodule "public/diff-so-fancy/diff-so-fancy.d"]
+	path = public/diff-so-fancy/diff-so-fancy.d
+	url = https://github.com/so-fancy/diff-so-fancy.git
+[submodule "public/kscreenlocker-auto-screen-off"]
+	path = public/kscreenlocker-auto-screen-off
+	url = https://github.com/felsenhower/kscreenlocker-auto-screen-off.git
+[submodule "public/neovim/pack/onedark/start/onedark.vim"]
+	path = public/neovim/pack/onedark/start/onedark.vim
+	url = https://github.com/joshdick/onedark.vim.git
+[submodule "public/ohmyzsh"]
+	path = public/ohmyzsh
+	url = https://github.com/felsenhower/ohmyzsh.git

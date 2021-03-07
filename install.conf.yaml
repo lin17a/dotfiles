@@ -1,0 +1,76 @@
+- defaults:
+    link:
+        create: true
+        
+- clean:
+    ~/:
+        recursive: false
+    ~/.config/:
+        recursive: true
+    ~/.ssh/:
+        recursive: true
+
+- create:
+    - ~/.ssh
+    - ~/.local/bin
+
+- shell:
+    -
+        command: 'git submodule update --init --recursive dotbot public'
+        stdout: true
+        stderr: true
+    -
+        command: '[ "$(whoami)" = "lina" ] && git submodule update --init --recursive private ; true'
+        stdout: true
+        stderr: true
+    -
+        command: 'touch ~/.ssh/config.local'
+        stdout: true
+        stderr: true
+        
+- link:
+    ~/.bashrc: public/bash/bashrc
+    ~/.bash_login: public/bash/bash_login
+    ~/.local/bin/diff-so-fancy: public/diff-so-fancy/diff-so-fancy
+    ~/.local/bin/diff-so-fancy.d: public/diff-so-fancy/diff-so-fancy.d
+    ~/.auto-screen-off:
+        path: public/kscreenlocker-auto-screen-off
+        if: 'env | grep -q XDG_CURRENT_DESKTOP=KDE'
+    ~/.config/nvim:
+        path: public/neovim
+        if: 'which nvim'
+    ~/.oh-my-zsh:
+        path: public/ohmyzsh
+        force: true
+    ~/.config/redshift.conf:
+        path: public/redshift/redshift.conf
+        if: 'which redshift'
+    ~/.config/redshift:
+        path: public/redshift/redshift
+        if: 'which redshift'
+    ~/.shelltools: public/shelltools
+    ~/.ssh/config: public/ssh/config
+    ~/.ssh/config.local:
+        path: private/ssh/config.local
+        if: '[ "$(whoami)" = "lina" ]'
+        force: true
+    ~/.config/vlc/vlcrc:
+        path: public/vlc/vlcrc
+        if: 'which vlc'
+    ~/.zshrc:
+        path: public/zsh/zshrc
+        if: 'which zsh'
+
+- shell:
+    -
+        command: 'cd public/pip && which pip3 >/dev/null && pip3 install --user -r requirements.txt ; true'
+        stdout: true
+        stderr: true
+    -
+        command: 'echo -en "\033[1;33mGithub CLI is " ; which gh >/dev/null || echo -n "not " ; echo "installed"! ; true'
+        stdout: true
+        stderr: true
+    -
+        command: 'echo -en "\033[1;33mthefuck is " ; which fuck >/dev/null || echo -n "not " ; echo "installed"! ; true'
+        stdout: true
+        stderr: true
